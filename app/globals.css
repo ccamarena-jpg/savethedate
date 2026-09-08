@@ -9,3 +9,60 @@
 @media(max-width:350px){.intro h1{font-size:32px}.letter h2{font-size:15px}.letter{padding:14px 8px}.letter-mark{font-size:17px}.date-photo{width:220px}.cinema-controls{padding:16px 12px;gap:8px}.film-credit{max-width:100px;line-height:1.6}.rsvp-page,.date-page{padding-left:22px;padding-right:22px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;transition-delay:0s!important}.film-photo{transform:none!important}.departing .photo-two{transform:translate(30%,-98%) rotate(11deg)}}
 
+
+/* Edición vintage: tinta, papel y tonos cálidos del moodboard. */
+:root{--ink:#49342b}
+.invitation::before,.date-page::before,.rsvp-page::before,.thanks-page::before{content:'';position:absolute;inset:17px;pointer-events:none;border:1px solid #691d273d;outline:1px solid #691d2720;outline-offset:5px}
+.invitation::after,.date-page::after,.rsvp-page::after,.thanks-page::after{opacity:.085}
+.intro .eyebrow{font-family:Georgia,serif;font-size:11px;letter-spacing:.24em}
+.intro h1{letter-spacing:-.055em;text-shadow:.5px .5px #691d2720;position:relative;padding:6px 0 20px;margin-bottom:18px}
+.intro h1::after{content:'';position:absolute;bottom:0;left:32%;right:32%;height:4px;border-top:1px solid #691d2770;border-bottom:1px solid #691d2735}
+.dedication{font-family:'Courier New',monospace;letter-spacing:.12em}
+.envelope{box-shadow:0 25px 40px #49342b2c,0 2px 5px #49342b20}
+.envelope-signature{font-size:15px;letter-spacing:.025em}
+.letter{background:#eee6d8;outline:1px solid #691d2760;outline-offset:-9px;padding:19px 15px}
+.letter-mark{border-bottom:1px solid #691d2740;padding-bottom:8px;width:65%}
+.letter h2{font-size:clamp(17px,4.2vw,24px)}
+.photo{background:#eee6d8;box-shadow:0 6px 17px #49342b45;padding:7px 7px 26px}
+.photo img,.date-photo img{filter:none}
+.photo-one img{object-position:53% center}
+.photo-two img{object-position:58% center}
+.photo figcaption{font-family:'Courier New',monospace;font-style:normal;font-size:9px;letter-spacing:.015em}
+.edition{font-family:'Courier New',monospace;font-size:10px;letter-spacing:.18em;color:#7a6553}
+.date-page{max-width:610px;padding:42px 30px 34px}
+.date-page>.eyebrow{font-family:'Courier New',monospace}
+.date-page h1{margin:13px 0 22px;font-size:45px}
+.date-photo{width:min(100%,328px);height:auto;aspect-ratio:1.48;transform:rotate(-2deg);border-color:#eee6d8;border-width:8px;border-bottom-width:32px;box-shadow:0 6px 20px #49342b30}
+.date-photo img{object-position:53% 50%}
+.date-photo span{font-size:16px;bottom:-25px}
+.countdown-wrap{width:100%;max-width:355px;margin:28px auto 15px;text-align:center;color:var(--wine)}
+.countdown-intro{font:italic 17px/1.4 Bodoni,Georgia;margin:0 0 13px;color:#63483b}
+.countdown{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid #691d2750;border-bottom:3px double #691d2750;padding:12px 0 10px}
+.countdown-unit{display:flex;flex-direction:column;gap:6px;min-width:0;border-right:1px solid #691d272c}
+.countdown-unit:last-child{border:0}
+.countdown-unit>span{font:35px/1.15 Bodoni,Georgia;font-variant-numeric:tabular-nums;letter-spacing:-.045em}
+.countdown-unit>small{font:10px/1.3 'Courier New',monospace;letter-spacing:.09em}
+.countdown-arrived{border-block:1px solid #691d2740;padding:20px 0;margin:24px 0}
+.countdown-arrived p{font:25px Bodoni,Georgia}
+.countdown-arrived span{font:12px/2 Arial,sans-serif}
+.date-full{font:12px/1.7 'Courier New',monospace;letter-spacing:-.03em}
+.date-page .personal-note{margin:21px 0;font-size:18px}
+.primary-button{outline:1px solid #f3efe656;outline-offset:-5px;background:#691d27}
+.primary-button:focus-visible{outline:2px solid var(--wine);outline-offset:5px}
+.small-note{margin-top:15px}
+.rsvp-page{padding:34px 34px}
+.thanks-page{padding:45px 34px}
+.thanks-mark{margin:30px 0 25px}
+.thanks-page .countdown-wrap{margin-top:30px;margin-bottom:25px}
+.real-film-reveal{position:absolute;inset:0;pointer-events:none;background:#291b20c7;display:flex;align-items:center;justify-content:center;flex-direction:column;color:var(--paper);text-align:center;padding:25px;animation:arrive 1s var(--ease)}
+.real-film-reveal p{font:clamp(40px,10vw,70px)/1.25 Bodoni,Georgia;margin:20px 0}
+.cinema-controls{z-index:4}
+.film-play,.video-retry{position:absolute;z-index:3;top:50%;left:50%;transform:translate(-50%,-50%);border:1px solid #f3efe670;background:#3b252bec;color:var(--paper);padding:24px;min-width:260px;text-align:center;font:12px/1.8 'Courier New',monospace;letter-spacing:.08em}
+.film-play span{display:block;font:30px Georgia;margin-top:8px}
+.video-retry p{margin-bottom:18px;font:17px/1.5 Bodoni,Georgia}
+.video-retry button{background:none;border:0;border-bottom:1px solid #f3efe680;color:var(--paper);padding:12px;font-size:12px}
+.real-film{height:auto;aspect-ratio:16/9;max-height:calc(100svh - 110px)}
+.film-play:focus-visible,.video-retry button:focus-visible{outline-color:var(--paper)}
+@media(min-width:750px){.intro h1{font-size:66px}.invitation::before{inset:28px}.letter{padding:25px 20px}.photo figcaption{font-size:11px}.date-page{padding:46px 45px 40px}.date-page h1{font-size:55px}.countdown-unit>span{font-size:42px}.real-film{max-width:1440px;width:90vw}.countdown-wrap{max-width:360px}}
+@media(max-width:350px){.date-page{padding-left:26px;padding-right:26px}.countdown-unit>span{font-size:29px}.countdown-unit>small{font-size:9px}.rsvp-page{padding-inline:27px}.photo figcaption{font-size:8px}}
+@media(prefers-reduced-motion:reduce){.real-film-reveal{animation:none}}

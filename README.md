@@ -15,19 +15,23 @@ Personalización: http://localhost:3000/?guest=Daniela
 Sin el parámetro, muestra PARA TI. El nombre se representa como texto, nunca como HTML.
 No se abre con doble clic en un HTML: el RSVP necesita el servidor y la base de datos.
 
-## Reemplazar los archivos finales
-- public/media/photos/01.jpg: foto principal, vertical o cuadrada; recomendación 1400 px o más.
-- public/media/photos/02.jpg: segunda foto; recomendación 1200 px o más.
-- Guarda el video real como public/media/video/pelicula.mp4.
-- En app/media.ts cambia video: '' por video: '/media/video/pelicula.mp4'.
-- Sustituye public/media/video/captions.vtt con subtítulos y tiempos del video final.
-- Recomendación de video: MP4 H.264, audio AAC, fast-start, versión optimizada para móvil.
-- El video debe contener el anuncio y la fecha, pues el sitio espera su final para mostrar RSVP.
-- Mientras video esté vacío, se reproduce una película provisional de 17 segundos hecha con las dos fotos y textos animados, sin audio. No es un video final de los novios.
-- Si falla la descarga del video final, el sitio ofrece automáticamente esta película provisional.
-- Fotos de muestra: Jonathan Borba https://unsplash.com/ko/사진/해변에서-키스하는-커플의-흑백-사진-yP_lK6ouc7Y y Brittani Burns https://unsplash.com/photos/a-man-and-woman-walking-on-a-beach-IyU1W90ZRVY. Son personas de referencia, no Claudia y Jorge. Sustituir antes de enviar.
+## Archivos reales y edición vintage
+- public/media/photos/claudia-jorge.jpeg: fotografía enviada por los novios, sin modificar sus colores. Los encuadres de las tarjetas se definen en CSS.
+- public/media/video/pelicula.mp4: SaveTheDay.mp4 optimizado a 1280 × 720, H.264/AAC, fast-start; 36.16 segundos, aproximadamente 11.3 MB.
+- El original de 323 MB se conserva intacto en la carpeta de origen del usuario.
+- app/media.ts configura las rutas. Para reemplazar el video, conserva la ruta o actualízala aquí.
+- Se anuncia «Nos casamos» a partir del segundo 30 y la fecha a partir del 33, sobre la película. Si cambias su duración, ajusta estos tiempos en app/page.tsx.
+- Se conserva el audio original. Si el navegador bloquea la reproducción inicial, el invitado puede tocar VER NUESTRA PELÍCULA.
+- Los subtítulos de muestra de la versión anterior no se usan con este video.
+- Diseño inspirado en el moodboard: marfil cálido, tinta Burgundy, interior Powder Blue, líneas dobles, tipografía editorial, detalles de máquina de escribir y fotos cálidas.
 - Libre Bodoni está incluida localmente; licencia en public/fonts/OFL.txt.
 
+## Cuenta regresiva
+La sección posterior a la película y la confirmación RSVP reemplazan 12 · 12 · 26 por días, horas, minutos y segundos.
+El objetivo es el comienzo del 12 de diciembre de 2026, 00:00 en Lima (UTC-5); no se ha proporcionado hora de ceremonia.
+Para cambiarlo, edita WEDDING_TIME en app/countdown-time.ts.
+Se recalcula desde el reloj del dispositivo cada segundo y al regresar a la pestaña; funciona igual en otras zonas horarias. Al llegar a cero muestra «El gran día ha llegado».
+La fecha escrita sigue disponible como información debajo del contador.
 ## Publicar en Sites
 El proyecto ya incluye su identificación en .openai/hosting.json y la migración D1.
 La publicación inicial en Sites es privada; debe habilitarse acceso público antes de enviar el enlace a los invitados por WhatsApp.
@@ -53,11 +57,12 @@ Para uso masivo, configura protección contra bots/rate limiting en el proveedor
 
 ## Accesibilidad y comportamiento
 Botones accesibles por teclado, foco al cambiar de sección, campos etiquetados, validación cliente/servidor, errores recuperables y reduced-motion.
-La película de muestra se pausa al ocultar la pestaña; el video real usa controles discretos, reproducción inline y subtítulos.
+El video real usa controles discretos y reproducción inline, con reintento visible ante fallos de carga.
 Sin música automática en la entrada ni anuncios de fecha antes de la película.
 La interfaz no incluye navbar, footer ni decoraciones culturales.
 
 ## Verificación
-Compilación y TypeScript, prueba HTTP del guardado, validación e idempotencia.
+Compilación y TypeScript. Cuenta regresiva verificada: zona horaria Lima, cambio de unidades y cero. Guardado, validación e idempotencia del RSVP comprobados en la versión anterior; su servidor se conserva.
 No se ha realizado una inspección visual en navegadores o dispositivos reales.
 La integración opcional WebMCP abre el mismo sobre. Se omite automáticamente en navegadores sin soporte; no se verificó en un contexto WebMCP compatible.
+

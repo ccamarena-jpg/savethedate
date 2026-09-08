@@ -2,6 +2,7 @@
 
 import { FormEvent, useEffect, useRef, useState } from 'react';
 import { media } from './media';
+import Countdown from './countdown';
 
 type Stage = 'envelope' | 'film' | 'date' | 'rsvp' | 'thanks';
 const DURATION = 17;
@@ -23,7 +24,7 @@ export default function Home() {
   const heading = useRef<HTMLHeadingElement>(null);
   const requestId = useRef('');
   const transitionTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const demo = !media.video || videoError;
+  const demo = !media.video;
 
   useEffect(() => {
     const value = (new URLSearchParams(location.search).get('guest') || '').trim().slice(0, 80);
@@ -101,8 +102,8 @@ export default function Home() {
           <div className="lining" />
           <div className="flap"><div className="flap-front"/><div className="flap-back"/></div>
           <div className="papers" aria-hidden={!opened}>
-            <figure className="photo photo-one"><img src={media.photos[0]} alt="Una caminata junto al mar" /><figcaption>un instante nuestro</figcaption></figure>
-            <figure className="photo photo-two"><img src={media.photos[1]} alt="De la mano, frente al océano" /><figcaption>y todo lo que viene.</figcaption></figure>
+            <figure className="photo photo-one"><img src={media.photos[0]} alt="Claudia y Jorge mirándose en una calle soleada" /><figcaption>un instante nuestro</figcaption></figure>
+            <figure className="photo photo-two"><img src={media.photos[1]} alt="Claudia y Jorge, una fotografía de nuestra historia" /><figcaption>y todo lo que viene.</figcaption></figure>
             <div className="letter"><p className="letter-mark">C <i>&</i> J</p><h2>TENEMOS ALGO<br/>QUE CONTARLES</h2><button className="text-button" tabIndex={opened ? 0 : -1} disabled={!opened || transitioning} onClick={discover}>DESCUBRIR <span aria-hidden="true">↗</span></button></div>
           </div>
           <div className="pocket"/><div className="fold-left"/><div className="fold-right"/>
@@ -125,15 +126,18 @@ export default function Home() {
             {elapsed >= 8 && elapsed < 12 && <div key="three"><span className="eyebrow">CLAUDIA & JORGE</span><p>Nos casamos.</p></div>}
             {elapsed >= 12 && <div key="four"><span className="eyebrow">SAVE THE DATE</span><p>12 · 12 · 26</p><span className="eyebrow">LIMA, PERÚ</span></div>}
           </div>
-        </div> : <video ref={video} className="real-film" src={media.video} poster={media.photos[0]} playsInline preload="metadata" muted={muted} onPlay={()=>setPlaying(true)} onPause={()=>setPlaying(false)} onEnded={()=>setStage('date')} onError={()=>{setVideoError(true);setElapsed(0);setPlaying(true);}} onTimeUpdate={()=>setElapsed(video.current?.currentTime || 0)}><track kind="captions" src={media.captions} srcLang="es" label="Español" default/></video>}
+        </div> : <video ref={video} className="real-film" src={media.video} poster={media.photos[0]} playsInline preload="metadata" muted={muted} onPlay={()=>{setPlaying(true);setError('');}} onPause={()=>setPlaying(false)} onEnded={()=>setStage('date')} onError={()=>{setVideoError(true);setPlaying(false);}} onTimeUpdate={()=>setElapsed(video.current?.currentTime || 0)} />}
+        {!demo && !videoError && elapsed >= 30 && <div className="real-film-reveal" aria-live="polite">{elapsed < 33 ? <><span className="eyebrow">CLAUDIA & JORGE</span><p>Nos casamos.</p></> : <><span className="eyebrow">SAVE THE DATE</span><p>12 · 12 · 26</p><span className="eyebrow">LIMA, PERÚ</span></>}</div>}
+        {!demo && !playing && !videoError && <button className="film-play" onClick={togglePlayback}>VER NUESTRA PELÍCULA <span aria-hidden="true">▷</span></button>}
+        {videoError && <div className="video-retry" role="alert"><p>No se pudo cargar nuestra película.</p><button onClick={()=>{setVideoError(false);setError('');video.current?.load();video.current?.play().catch(()=>setPlaying(false));}}>VOLVER A INTENTAR</button></div>}
         <div className="cinema-controls"><span className="film-credit">UNA PELÍCULA DE C & J</span><div><button onClick={togglePlayback}>{playing ? 'PAUSAR' : 'REPRODUCIR'}</button>{!demo && <button onClick={()=>setMuted(v=>!v)}>{muted ? 'ACTIVAR SONIDO' : 'SILENCIAR'}</button>}</div></div>
         {error && <p className="film-error" role="alert">{error}</p>}
       </section>}
 
       {stage === 'date' && <section className="date-page">
         <p className="eyebrow">SAVE THE DATE</p><h1 ref={heading} tabIndex={-1}>Nos casamos.</h1>
-        <div className="date-photo"><img src={media.photos[0]} alt="Una historia junto al mar"/><span>Claudia <i>&</i> Jorge</span></div>
-        <p className="date-numbers">12 <span>·</span> 12 <span>·</span> 26</p><p className="date-full">12 de diciembre de 2026 · Lima, Perú</p>
+        <div className="date-photo"><img src={media.photos[0]} alt="Claudia y Jorge, juntos bajo la luz de la tarde"/><span>Claudia <i>&</i> Jorge</span></div>
+        <Countdown/><p className="date-full">12 de diciembre de 2026 · Lima, Perú</p>
         <p className="personal-note">Lo mejor de nuestra historia<br/>también se escribe contigo.</p>
         <button className="primary-button" onClick={()=>setStage('rsvp')}>CONFIRMAR ASISTENCIA <span aria-hidden="true">↗</span></button>
         <p className="small-note">Pronto, todos los detalles.</p>
@@ -153,7 +157,7 @@ export default function Home() {
         </form>
       </section>}
 
-      {stage === 'thanks' && <section className="thanks-page"><p className="eyebrow">RESPUESTA RECIBIDA</p><span className="thanks-mark" aria-hidden="true">C<i>&</i>J</span><h1 ref={heading} tabIndex={-1}>Gracias, {name.trim().split(/\s+/)[0]}.</h1><p>{attendance === 'yes' ? 'Qué alegría saber que estarás con nosotros.' : 'Gracias por hacérnoslo saber. Te llevaremos con nosotros en este día.'}</p><p className="personal-note">Con todo nuestro cariño,<br/><i>Claudia & Jorge</i></p><div className="confirmation-date">12 · 12 · 26<br/><span>LIMA, PERÚ</span></div></section>}
+      {stage === 'thanks' && <section className="thanks-page"><p className="eyebrow">RESPUESTA RECIBIDA</p><span className="thanks-mark" aria-hidden="true">C<i>&</i>J</span><h1 ref={heading} tabIndex={-1}>Gracias, {name.trim().split(/\s+/)[0]}.</h1><p>{attendance === 'yes' ? 'Qué alegría saber que estarás con nosotros.' : 'Gracias por hacérnoslo saber. Te llevaremos con nosotros en este día.'}</p><p className="personal-note">Con todo nuestro cariño,<br/><i>Claudia & Jorge</i></p><Countdown/><p className="eyebrow">LIMA, PERÚ</p></section>}
     </main>
   );
 }
