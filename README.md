@@ -66,3 +66,11 @@ Compilación y TypeScript. Cuenta regresiva verificada: zona horaria Lima, cambi
 No se ha realizado una inspección visual en navegadores o dispositivos reales.
 La integración opcional WebMCP abre el mismo sobre. Se omite automáticamente en navegadores sin soporte; no se verificó en un contexto WebMCP compatible.
 
+
+## Referencia de invitación incorporada
+La grabación del 8 de septiembre se usa como referencia de composición y movimiento:
+dos fotografías horizontales escalonadas, pequeñas rotaciones, sello desplazado y tarjeta frontal.
+La foto superior es public/media/photos/pelicula-retrato.jpg, extraída de su película.
+La foto frontal sigue siendo la fotografía original enviada.
+Se mantiene el anuncio de la fecha dentro del video y el contador posterior.
+Los elementos botánicos y los datos de los novios de la referencia no se incorporan.

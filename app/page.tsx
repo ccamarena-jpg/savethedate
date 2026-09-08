@@ -102,11 +102,11 @@ export default function Home() {
           <div className="lining" />
           <div className="flap"><div className="flap-front"/><div className="flap-back"/></div>
           <div className="papers" aria-hidden={!opened}>
-            <figure className="photo photo-one"><img src={media.photos[0]} alt="Claudia y Jorge mirándose en una calle soleada" /><figcaption>un instante nuestro</figcaption></figure>
-            <figure className="photo photo-two"><img src={media.photos[1]} alt="Claudia y Jorge, una fotografía de nuestra historia" /><figcaption>y todo lo que viene.</figcaption></figure>
-            <div className="letter"><p className="letter-mark">C <i>&</i> J</p><h2>TENEMOS ALGO<br/>QUE CONTARLES</h2><button className="text-button" tabIndex={opened ? 0 : -1} disabled={!opened || transitioning} onClick={discover}>DESCUBRIR <span aria-hidden="true">↗</span></button></div>
+            <figure className="photo photo-one"><img src={media.photos[1]} alt="Claudia y Jorge caminando juntos, un fotograma de su película" /><figcaption>un instante nuestro</figcaption></figure>
+            <figure className="photo photo-two"><img src={media.photos[0]} alt="Claudia y Jorge mirándose en una calle soleada" /><figcaption>y todo lo que viene.</figcaption></figure>
           </div>
           <div className="pocket"/><div className="fold-left"/><div className="fold-right"/>
+          <div className="letter" aria-hidden={!opened}><p className="letter-mark">C <i>&</i> J</p><h2>TENEMOS ALGO<br/>QUE CONTARLES</h2><button className="text-button" tabIndex={opened ? 0 : -1} disabled={!opened || transitioning} onClick={discover}>DESCUBRIR <span aria-hidden="true">↗</span></button></div>
           <button className="seal" tabIndex={opened ? -1 : 0} disabled={opened} onClick={() => setOpened(true)} aria-label="Abrir la carta"><span>C</span><i>&</i><span>J</span></button>
           <span className="envelope-signature" aria-hidden="true">con cariño, C & J</span>
         </div>

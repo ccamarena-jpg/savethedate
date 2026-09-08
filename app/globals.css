@@ -66,3 +66,26 @@
 @media(min-width:750px){.intro h1{font-size:66px}.invitation::before{inset:28px}.letter{padding:25px 20px}.photo figcaption{font-size:11px}.date-page{padding:46px 45px 40px}.date-page h1{font-size:55px}.countdown-unit>span{font-size:42px}.real-film{max-width:1440px;width:90vw}.countdown-wrap{max-width:360px}}
 @media(max-width:350px){.date-page{padding-left:26px;padding-right:26px}.countdown-unit>span{font-size:29px}.countdown-unit>small{font-size:9px}.rsvp-page{padding-inline:27px}.photo figcaption{font-size:8px}}
 @media(prefers-reduced-motion:reduce){.real-film-reveal{animation:none}}
+
+/* Composición de la invitación de referencia: dos fotos y tarjeta frontal. */
+.photo{width:74%;height:84%;left:18%;top:12%;padding:7px 7px 24px;transform:translateY(4%) scale(.78);transition:transform 1.9s var(--ease),opacity .45s}
+.photo-one{left:24%;top:8%}
+.photo-two{left:12%;top:12%}
+.photo-one img,.photo-two img{object-position:50% 50%;object-fit:cover}
+.opened .photo-one{transform:translate(3%,-129%) rotate(10deg);transition-delay:.7s}
+.opened .photo-two{transform:translate(-11%,-79%) rotate(-8deg);transition-delay:1.15s}
+.envelope>.letter{z-index:6;left:-2%;top:54%;width:66%;height:67%;padding:14px 16px;transform:translate(20%,12%) rotate(0);opacity:0;pointer-events:none;outline-offset:-6px;transition:transform 1.55s var(--ease),opacity .55s}
+.envelope>.letter .letter-mark{display:none}
+.envelope>.letter h2{font-size:clamp(15px,4vw,23px);line-height:1.28}
+.envelope>.letter .text-button{font-size:11px;letter-spacing:.12em;padding:7px 0;min-height:44px}
+.opened>.letter{transform:translate(-7%,-16%) rotate(-7deg);opacity:1;pointer-events:auto;transition-delay:1.8s}
+.opened .seal{opacity:1;transform:translate(135%,28%) rotate(8deg) scale(.8);transition:transform 1.1s var(--ease),opacity .35s;transition-delay:.1s}
+.is-open .envelope-signature{opacity:0;transition:opacity .4s}
+.is-open .envelope{transform:translateY(100px)}
+.is-open .hint{transform:translateY(104px)}
+.departing .photo-two{transform:translate(0,-70%) rotate(0) scale(4);transition:transform .95s var(--ease);transition-delay:0s}
+.departing .letter{opacity:0;transition:opacity .3s;transition-delay:0s}
+.departing .seal{opacity:0;transition:opacity .3s;transition-delay:0s}
+@media(min-width:750px){.is-open .envelope{transform:translateY(125px)}.is-open .hint{transform:translateY(125px)}.envelope>.letter{padding:20px 25px}.envelope>.letter .text-button{font-size:12px}.envelope>.letter h2{font-size:23px}}
+@media(max-width:350px){.envelope>.letter{padding:12px}.envelope>.letter h2{font-size:14px}.envelope>.letter .text-button{font-size:10px}.photo figcaption{font-size:8px}}
+@media(prefers-reduced-motion:reduce){.departing .photo-two{transform:translate(-11%,-79%) rotate(-8deg)}}
