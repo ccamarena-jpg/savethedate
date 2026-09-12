@@ -8,10 +8,13 @@ type Stage = 'envelope' | 'film' | 'date' | 'rsvp' | 'thanks';
 export default function Home() {
   const [stage,setStage]=useState<Stage>('envelope');
   const [opened,setOpened]=useState(false);
+  const [enlargedPhoto,setEnlargedPhoto]=useState<string|null>(null);
+  const photoDialog=useRef<HTMLDialogElement>(null);
   const [name,setName]=useState('');
   const [attendance,setAttendance]=useState('yes');
   const [playing,setPlaying]=useState(true);
-  const [muted,setMuted]=useState(false);
+  const cinema=useRef<HTMLElement>(null);
+  const [fullscreen,setFullscreen]=useState(false);
   const [busy,setBusy]=useState(false);
   const [error,setError]=useState('');
   const [videoError,setVideoError]=useState(false);
@@ -28,6 +31,10 @@ export default function Home() {
   useEffect(()=>{
     if(stage==='film')video.current?.play().catch(()=>setPlaying(false));
   },[stage]);
+  useEffect(()=>{
+    if(enlargedPhoto)photoDialog.current?.showModal();
+    else photoDialog.current?.close();
+  },[enlargedPhoto]);
   function discover(){
     if(transitioning)return;
     setTransitioning(true);
@@ -37,8 +44,31 @@ export default function Home() {
   }
   function togglePlayback(){
     if(!video.current)return;
-    if(playing)video.current.pause();
-    else video.current.play().catch(()=>{setError('Toca reproducir para iniciar la película.');setPlaying(false);});
+    if(!video.current.paused)video.current.pause();
+    else video.current.play().catch(()=>setPlaying(false));
+  }
+  useEffect(()=>{
+    const changed=()=>setFullscreen(Boolean(document.fullscreenElement));
+    document.addEventListener('fullscreenchange',changed);
+    return ()=>document.removeEventListener('fullscreenchange',changed);
+  },[]);
+  async function toggleFullscreen(){
+    const player=video.current as (HTMLVideoElement & {webkitEnterFullscreen?:()=>void})|null;
+    if(!player)return;
+    try{
+      if(document.fullscreenElement){await document.exitFullscreen();return;}
+      if(cinema.current?.requestFullscreen){
+        await cinema.current.requestFullscreen();
+        const orientation=screen.orientation as ScreenOrientation & {lock?:(mode:string)=>Promise<void>};
+        await orientation?.lock?.('landscape').catch(()=>{});
+      }else{player.webkitEnterFullscreen?.();}
+    }catch{try{player.webkitEnterFullscreen?.();}catch{}}
+  }
+  async function finishFilm(){
+    if(document.fullscreenElement)await document.exitFullscreen().catch(()=>{});
+    const player=video.current as (HTMLVideoElement & {webkitExitFullscreen?:()=>void})|null;
+    try{player?.webkitExitFullscreen?.();}catch{}
+    setStage('date');
   }
   async function submit(event:FormEvent<HTMLFormElement>){
     event.preventDefault();
@@ -82,26 +112,24 @@ export default function Home() {
         <div className="envelope-body"><img src="/media/stationery/envelope-jc.png" alt=""/></div>
         <div className="flap"><div className="flap-front"><img src="/media/stationery/envelope-jc.png" alt=""/></div><div className="flap-back"/></div>
         <div className="papers" aria-hidden={!opened}>
-          <figure className="photo photo-one"><img src={media.photos[1]} alt="Jorge y Claudia caminando juntos"/><figcaption>un instante nuestro</figcaption></figure>
-          <figure className="photo photo-two"><img src={media.photos[0]} alt="Jorge y Claudia bajo la luz de la tarde"/><figcaption>y todo lo que viene.</figcaption></figure>
+          <figure className="photo photo-one"><button className="photo-open" disabled={!opened||transitioning} tabIndex={opened?0:-1} onClick={()=>setEnlargedPhoto(media.photos[1])} aria-label="Ampliar foto de Jorge y Claudia caminando juntos"><img src={media.photos[1]} alt="Jorge y Claudia caminando juntos"/></button><figcaption>un instante nuestro</figcaption></figure>
+          <figure className="photo photo-two"><button className="photo-open" disabled={!opened||transitioning} tabIndex={opened?0:-1} onClick={()=>setEnlargedPhoto(media.photos[0])} aria-label="Ampliar foto de Jorge y Claudia bajo la luz de la tarde"><img src={media.photos[0]} alt="Jorge y Claudia bajo la luz de la tarde"/></button><figcaption>y todo lo que viene.</figcaption></figure>
         </div>
-        <div className="letter" aria-hidden={!opened}><h2>TENEMOS ALGO<br/>QUE CONTARLES</h2><button className="text-button" tabIndex={opened?0:-1} disabled={!opened||transitioning} onClick={discover}>DESCUBRIR <span aria-hidden="true">↗</span></button></div>
+        <div className="letter" aria-hidden={!opened}><h2>TENEMOS ALGO<br/>QUE CONTARLES</h2><button className="text-button" tabIndex={opened?0:-1} disabled={!opened||transitioning} onClick={discover}>DESCÚBRELO <span aria-hidden="true">↗</span></button></div>
         <img className="anthuriums" src="/media/stationery/anthuriums.png" alt="" aria-hidden="true"/>
         <button className="open-envelope" tabIndex={opened?-1:0} disabled={opened} onClick={()=>setOpened(true)} aria-label="Abrir el sobre de Jorge y Claudia"/>
       </div>
       <p className="hint" aria-live="polite">{opened?'Hay historias que merecen ser compartidas.':'Toca el sobre para abrir'}</p>
     </section>}
-    {stage==='film'&&<section className="cinema" aria-label="Nuestra película">
+    {stage==='film'&&<section ref={cinema} className="cinema" aria-label="Nuestra película">
       <h1 className="sr-only" tabIndex={-1} ref={heading}>Nuestra película</h1>
-      <video ref={video} className="real-film" src={media.video} poster={media.photos[0]} playsInline preload="metadata" muted={muted}
+      <video ref={video} className="real-film" src={media.video} poster={media.photos[0]} playsInline preload="metadata" onClick={togglePlayback} tabIndex={0} role="button" aria-label={playing?'Pausar video':'Reanudar video'} onKeyDown={e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();togglePlayback();}}}
         onPlay={()=>{setPlaying(true);setError('');}}
         onPause={()=>setPlaying(false)}
-        onEnded={()=>setStage('date')}
+        onEnded={finishFilm}
         onError={()=>{setVideoError(true);setPlaying(false);}}/>
-      {!playing&&!videoError&&<button className="film-play" onClick={togglePlayback}>VER NUESTRA PELÍCULA <span aria-hidden="true">▷</span></button>}
       {videoError&&<div className="video-retry" role="alert"><p>No se pudo cargar nuestra película.</p><button onClick={()=>{setVideoError(false);setError('');video.current?.load();video.current?.play().catch(()=>setPlaying(false));}}>VOLVER A INTENTAR</button></div>}
-      <div className="cinema-controls"><button onClick={togglePlayback}>{playing?'PAUSAR':'REPRODUCIR'}</button><button onClick={()=>setMuted(v=>!v)}>{muted?'ACTIVAR SONIDO':'SILENCIAR'}</button></div>
-      {error&&<p className="film-error" role="alert">{error}</p>}
+      <button className="fullscreen-button" onClick={toggleFullscreen} aria-label={fullscreen?'Salir de pantalla completa':'Ver en pantalla completa'} title="Pantalla completa"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true"><path d={fullscreen?'M3 9h6V3m6 0v6h6M3 15h6v6m6 0v-6h6':'M9 3H3v6m12-6h6v6M3 15v6h6m6 0h6v-6'}/></svg></button>
     </section>}
     {stage==='date'&&<section className="date-page">
       <h1 className="sr-only" ref={heading} tabIndex={-1}>Nuestra celebración</h1>
@@ -129,6 +157,10 @@ export default function Home() {
       <p>{attendance==='yes'?'Qué alegría saber que estarás con nosotros.':'Gracias por hacérnoslo saber. Te llevaremos con nosotros en este día.'}</p>
       <p className="personal-note">Con todo nuestro cariño,<br/><i className="script-names">Jorge y Claudia</i></p><Countdown/><p className="eyebrow">LIMA, PERÚ</p>
     </section>}
+    <dialog ref={photoDialog} className="photo-dialog" aria-label="Fotografía ampliada" onCancel={()=>setEnlargedPhoto(null)} onClose={()=>setEnlargedPhoto(null)} onClick={e=>{if(e.target===e.currentTarget)setEnlargedPhoto(null);}}>
+      <button className="photo-close" onClick={()=>setEnlargedPhoto(null)} aria-label="Cerrar fotografía" autoFocus>×</button>
+      {enlargedPhoto&&<img src={enlargedPhoto} alt="Jorge y Claudia" />}
+    </dialog>
   </main>;
 }
 
