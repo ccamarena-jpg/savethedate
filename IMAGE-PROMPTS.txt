@@ -1,0 +1,19 @@
+Built-in image_gen used, one call per asset.
+
+ENVELOPE
+Use case: product-mockup. Asset type: isolated transparent wedding website envelope.
+Input image: aesthetic reference only. Create a new product photograph, do not reproduce the screenshot.
+Scene/backdrop: genuinely transparent alpha background, no surface and no surrounding shadow.
+Subject: ONE closed premium warm ivory rectangular wedding envelope, width-to-height ratio 1.55. Thick matte delicately textured paper. Front facing perfectly flat orthographic view, no perspective skew. Wide triangular flap hinges along the horizontal top edge and descends to 70 percent of body height, with softly rounded tip. Fine antique-white floral lace trim follows BOTH lower diagonal edges of the triangular flap, delicate realistic fabric detail. Small fine dark burgundy calligraphic monogram printed directly on the paper centered on flap.
+Text verbatim: "C & J". No other text.
+Composition: entire envelope visible, tightly bounded landscape canvas with transparent padding at most 3 percent on each edge. Straight horizontal top and bottom and vertical sides. Realistic editorial studio product photography, soft diffuse light preserving subtle paper texture and refined ivory tones.
+Avoid: flowers, plants, ribbons, wax seals, backgrounds, browser/UI, page text, play buttons, hands, props, watermark, excessive shadow.
+
+LILIES
+Use case: photorealistic-natural. Asset type: transparent wedding website botanical cutout.
+Input image: aesthetic reference only for delicate flowers; omit all screenshot elements.
+Scene/backdrop: genuinely transparent alpha background, no surface.
+Subject: exactly TWO small ivory-white calla lily flowers with long slender natural green stems, isolated together. Each stem terminates in one elegant ivory-white calla lily bloom. Delicate photoreal editorial styling, graceful slender stems leaning diagonally from lower left to upper right blooms. Entire stems and both blooms visible, separated enough to read as exactly two flowers, arranged as a delicate pair.
+Composition: tightly framed botanical cutout, soft natural studio light, realistic petal folds and understated warm white coloring.
+Avoid: extra flowers, leaves, other plants, envelope, text, browser/UI, page background, vases, ribbons, wax seals, hands, props, watermark, cast shadow.
+

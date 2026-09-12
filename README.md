@@ -1,76 +1,61 @@
-# Claudia & Jorge — Una carta para ti
+# Claudia y Jorge — Tienes un mensaje de
 
-Micrositio mobile-first (390 × 844), React/Vinext y Cloudflare D1. Los nombres y la fecha no se anuncian en metadatos: la fecha aparece por primera vez dentro de la película.
+Micrositio mobile-first, React/Vinext y Cloudflare D1.
 
-## Abrir localmente
-Necesitas Node.js 22.13 o superior.
-1. Descomprime el ZIP y abre una terminal en esta carpeta.
-2. Ejecuta: npm ci
-3. Ejecuta: npm run build
-4. Ejecuta: npx wrangler d1 execute DB --local --persist-to .wrangler/state --config dist/server/wrangler.json --file drizzle/0000_gorgeous_red_skull.sql
-5. Ejecuta: npm run dev
-6. Abre la dirección que imprime la terminal, normalmente http://localhost:3000/
+## Abrir
+Node.js 22.13 o superior:
+1. npm ci
+2. npm run build
+3. npx wrangler d1 execute DB --local --persist-to .wrangler/state --config dist/server/wrangler.json --file drizzle/0000_gorgeous_red_skull.sql
+4. npm run dev
+5. Abre la URL impresa, normalmente http://localhost:3000/
 
-Personalización: http://localhost:3000/?guest=Daniela
-Sin el parámetro, muestra PARA TI. El nombre se representa como texto, nunca como HTML.
-No se abre con doble clic en un HTML: el RSVP necesita el servidor y la base de datos.
+?guest=Daniela sigue prellenando el nombre del formulario. El destinatario ya no se muestra en la portada.
+El RSVP necesita el servidor y la base de datos; no se abre haciendo doble clic en un HTML.
 
-## Archivos reales y edición vintage
-- public/media/photos/claudia-jorge.jpeg: fotografía enviada por los novios, sin modificar sus colores. Los encuadres de las tarjetas se definen en CSS.
-- public/media/video/pelicula.mp4: SaveTheDay.mp4 optimizado a 1280 × 720, H.264/AAC, fast-start; 36.16 segundos, aproximadamente 11.3 MB.
-- El original de 323 MB se conserva intacto en la carpeta de origen del usuario.
-- app/media.ts configura las rutas. Para reemplazar el video, conserva la ruta o actualízala aquí.
-- Se anuncia «Nos casamos» a partir del segundo 30 y la fecha a partir del 33, sobre la película. Si cambias su duración, ajusta estos tiempos en app/page.tsx.
-- Se conserva el audio original. Si el navegador bloquea la reproducción inicial, el invitado puede tocar VER NUESTRA PELÍCULA.
-- Los subtítulos de muestra de la versión anterior no se usan con este video.
-- Diseño inspirado en el moodboard: marfil cálido, tinta Burgundy, interior Powder Blue, líneas dobles, tipografía editorial, detalles de máquina de escribir y fotos cálidas.
-- Libre Bodoni está incluida localmente; licencia en public/fonts/OFL.txt.
+## Diseño actual
+Fondo vino profundo #310606, sobre ivory frontal de papel texturizado con encaje blanco antiguo y monograma C & J impreso. Dos calas a la derecha, sin sellos ni cintas.
+Encabezado: «Tienes un mensaje de» y «Claudia / y Jorge».
+Se quitaron las líneas, Para ti, con cariño C & J, el crédito de película y las sobreimpresiones Nos casamos/fecha.
+El video real se reproduce completo. Solo su evento ended abre el cierre con foto, cuenta regresiva y RSVP.
+No se corta la película por tiempo ni se añade texto sobre ella.
 
-## Cuenta regresiva
-La sección posterior a la película y la confirmación RSVP reemplazan 12 · 12 · 26 por días, horas, minutos y segundos.
-El objetivo es el comienzo del 12 de diciembre de 2026, 00:00 en Lima (UTC-5); no se ha proporcionado hora de ceremonia.
-Para cambiarlo, edita WEDDING_TIME en app/countdown-time.ts.
-Se recalcula desde el reloj del dispositivo cada segundo y al regresar a la pestaña; funciona igual en otras zonas horarias. Al llegar a cero muestra «El gran día ha llegado».
-La fecha escrita sigue disponible como información debajo del contador.
-## Publicar en Sites
-El proyecto ya incluye su identificación en .openai/hosting.json y la migración D1.
-La publicación inicial en Sites es privada; debe habilitarse acceso público antes de enviar el enlace a los invitados por WhatsApp.
-Sites aplica las migraciones y conecta DB al publicar.
+## Tipografía exacta pendiente
+Bickham Script Pro 3 no estaba instalada y no se recibió un proyecto Adobe Fonts.
+CSS prioriza bickham-script-pro-3 y la versión local Bickham Script Pro 3, cuando estén disponibles.
+Provisionalmente usa Pinyon Script mediante Google Fonts, con reserva local de cursiva.
+Para que todos los invitados vean Bickham exacta, incorpora el enlace CSS del proyecto web autorizado de Adobe Fonts en app/layout.tsx.
+No se incluye ni se afirma haber instalado Bickham. Referencia: https://fonts.adobe.com/fonts/bickham-script
+Libre Bodoni está incluida localmente, con su licencia en public/fonts/OFL.txt.
 
-## Publicar por tu cuenta en Cloudflare Workers
-1. Ejecuta npx wrangler login y npx wrangler d1 create claudia-jorge-rsvp.
-2. Copia el database_id devuelto en wrangler.deploy.jsonc.
-3. Ejecuta npm run build.
-4. Ejecuta npx wrangler d1 migrations apply DB --remote --config wrangler.deploy.jsonc.
-5. Ejecuta npx wrangler deploy --config wrangler.deploy.jsonc.
-El proveedor devolverá la URL pública. El dominio personalizado es opcional.
-No es un sitio estático para subir solo a GitHub Pages: requiere Workers y D1 para guardar RSVP.
+## Archivos
+- public/media/photos/claudia-jorge.jpeg: foto original de los novios.
+- public/media/photos/pelicula-retrato.jpg: fotograma de su película.
+- public/media/video/pelicula.mp4: video real optimizado a 1280 × 720, H.264/AAC y fast-start; 36.16 s, aproximadamente 11.3 MB. No se modifica el original de 323 MB.
+- public/media/stationery/envelope-ivory.png: sobre generado con ImageGen integrado (modo built-in). El recorte CSS evita el margen exterior del archivo.
+- public/media/stationery/callas.png: dos calas generadas con ImageGen integrado, con canal alfa.
+- IMAGE-PROMPTS.txt: prompts exactos de ambos recursos.
+- app/media.ts: rutas de foto y video.
+- app/countdown-time.ts: objetivo del contador, 12/12/2026 a las 00:00 de Lima (UTC-5), hasta recibir la hora real.
 
-## Consultar respuestas
-En Sites, consulta la tabla rsvps desde la gestión de datos del sitio.
-En Cloudflare, abre D1 → claudia-jorge-rsvp → Console:
+## Publicación
+Sites: reutiliza el project_id de .openai/hosting.json. No crea otro sitio.
+Cloudflare por cuenta propia:
+1. npx wrangler login
+2. npx wrangler d1 create claudia-jorge-rsvp
+3. Copia el database_id devuelto en wrangler.deploy.jsonc.
+4. npm run build
+5. npx wrangler d1 migrations apply DB --remote --config wrangler.deploy.jsonc
+6. npx wrangler deploy --config wrangler.deploy.jsonc
+
+## Respuestas
+Consulta la tabla rsvps desde la gestión de datos privada de Sites o Cloudflare D1.
 SELECT name, attendance, message, created_at FROM rsvps ORDER BY created_at DESC;
-yes = asistirá; no = no podrá asistir. No hay una ruta pública que liste respuestas.
-Solo se muestra confirmación después de que el servidor guarda la respuesta.
-Los reintentos del mismo envío no duplican la fila. Una visita nueva permite otro envío.
-Para uso masivo, configura protección contra bots/rate limiting en el proveedor.
+yes = asistirá, no = no podrá. No existe una ruta pública que liste respuestas.
+La confirmación se muestra solo después de guardar correctamente; los reintentos de un mismo envío no duplican la fila.
 
-## Accesibilidad y comportamiento
-Botones accesibles por teclado, foco al cambiar de sección, campos etiquetados, validación cliente/servidor, errores recuperables y reduced-motion.
-El video real usa controles discretos y reproducción inline, con reintento visible ante fallos de carga.
-Sin música automática en la entrada ni anuncios de fecha antes de la película.
-La interfaz no incluye navbar, footer ni decoraciones culturales.
-
-## Verificación
-Compilación y TypeScript. Cuenta regresiva verificada: zona horaria Lima, cambio de unidades y cero. Guardado, validación e idempotencia del RSVP comprobados en la versión anterior; su servidor se conserva.
-No se ha realizado una inspección visual en navegadores o dispositivos reales.
-La integración opcional WebMCP abre el mismo sobre. Se omite automáticamente en navegadores sin soporte; no se verificó en un contexto WebMCP compatible.
-
-
-## Referencia de invitación incorporada
-La grabación del 8 de septiembre se usa como referencia de composición y movimiento:
-dos fotografías horizontales escalonadas, pequeñas rotaciones, sello desplazado y tarjeta frontal.
-La foto superior es public/media/photos/pelicula-retrato.jpg, extraída de su película.
-La foto frontal sigue siendo la fotografía original enviada.
-Se mantiene el anuncio de la fecha dentro del video y el contador posterior.
-Los elementos botánicos y los datos de los novios de la referencia no se incorporan.
+## Validación
+Compilación y TypeScript correctos. Ruta y nuevos recursos responden HTTP 200.
+No se realizó inspección visual en navegador/dispositivo. Assets inspeccionados directamente.
+La integración WebMCP opcional no se verificó en contexto compatible.
+El backend RSVP y la cuenta regresiva conservan la implementación previamente verificada.
