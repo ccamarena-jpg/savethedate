@@ -21,10 +21,10 @@ El video real se reproduce completo. Solo su evento ended abre el cierre con fot
 No se corta la película por tiempo ni se añade texto sobre ella.
 
 ## Tipografía
-WindSong es la alternativa gratuita elegida al estilo manuscrito de Brittany Signature / Amsterdam Four para los nombres y acentos caligráficos.
-Se incluye localmente en public/fonts/windsong.ttf, junto con su licencia abierta public/fonts/WindSong-OFL.txt.
+Pinyon Script es la fuente caligráfica clásica elegida para los nombres y acentos.
+Se incluye localmente en public/fonts/pinyon-script.ttf, junto con su licencia abierta public/fonts/Pinyon-OFL.txt.
 No necesita Adobe Fonts ni descargas desde Google Fonts al abrir la invitación.
-Fuente oficial: https://github.com/google/fonts/tree/main/ofl/windsong
+Fuente oficial: https://github.com/google/fonts/tree/main/ofl/pinyonscript
 Libre Bodoni sigue incluida localmente para el texto editorial.
 ## Archivos
 - public/media/photos/claudia-jorge.jpeg: foto original de los novios.

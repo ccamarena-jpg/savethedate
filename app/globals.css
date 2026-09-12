@@ -1,8 +1,8 @@
-@font-face{font-family:'WindSong';src:url('/fonts/windsong.ttf') format('truetype');font-style:normal;font-weight:400;font-display:swap}
+@font-face{font-family:'Pinyon Script';src:url('/fonts/pinyon-script.ttf') format('truetype');font-style:normal;font-weight:400;font-display:swap}
 @font-face{font-family:Bodoni;src:url('/fonts/bodoni.ttf') format('truetype');font-style:normal;font-weight:400;font-display:swap}
 @font-face{font-family:Bodoni;src:url('/fonts/bodoni-italic.ttf') format('truetype');font-style:italic;font-weight:400;font-display:swap}
 
-:root{--wine:#691d27;--deep-wine:#310606;--paper:#f3efe6;--ink:#49342b;--ease:cubic-bezier(.22,.7,.2,1);--script:'WindSong',cursive}
+:root{--wine:#691d27;--deep-wine:#310606;--paper:#f3efe6;--ink:#49342b;--ease:cubic-bezier(.22,.7,.2,1);--script:'Pinyon Script',cursive}
 *{box-sizing:border-box}
 html{background:var(--paper)}
 body{margin:0;color:var(--wine);font-family:Arial,sans-serif}
