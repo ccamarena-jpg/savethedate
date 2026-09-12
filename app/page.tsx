@@ -75,19 +75,19 @@ export default function Home() {
   },[]);
 
   return <main className={'experience stage-'+stage}>
-    {stage==='envelope'&&<section className={'invitation '+(opened?'is-open ':'')+(transitioning?'departing':'')} aria-label="Un mensaje de Claudia y Jorge">
-      <div className="intro"><p className="eyebrow">Tienes un mensaje de</p><h1 className="couple-names"><span>Claudia</span><span>y Jorge</span></h1></div>
+    {stage==='envelope'&&<section className={'invitation '+(opened?'is-open ':'')+(transitioning?'departing':'')} aria-label="Un mensaje de Jorge y Claudia">
+      <div className="intro"><p className="eyebrow">Tienes un mensaje de</p><h1 className="couple-names"><span>Jorge</span><span>y Claudia</span></h1></div>
       <div className={'envelope '+(opened?'opened':'')}>
         <div className="lining"/>
-        <div className="envelope-body"><img src="/media/stationery/envelope-ivory.png" alt=""/></div>
-        <div className="flap"><div className="flap-front"><img src="/media/stationery/envelope-ivory.png" alt=""/></div><div className="flap-back"/></div>
+        <div className="envelope-body"><img src="/media/stationery/envelope-jc.png" alt=""/></div>
+        <div className="flap"><div className="flap-front"><img src="/media/stationery/envelope-jc.png" alt=""/></div><div className="flap-back"/></div>
         <div className="papers" aria-hidden={!opened}>
-          <figure className="photo photo-one"><img src={media.photos[1]} alt="Claudia y Jorge caminando juntos"/><figcaption>un instante nuestro</figcaption></figure>
-          <figure className="photo photo-two"><img src={media.photos[0]} alt="Claudia y Jorge bajo la luz de la tarde"/><figcaption>y todo lo que viene.</figcaption></figure>
+          <figure className="photo photo-one"><img src={media.photos[1]} alt="Jorge y Claudia caminando juntos"/><figcaption>un instante nuestro</figcaption></figure>
+          <figure className="photo photo-two"><img src={media.photos[0]} alt="Jorge y Claudia bajo la luz de la tarde"/><figcaption>y todo lo que viene.</figcaption></figure>
         </div>
         <div className="letter" aria-hidden={!opened}><h2>TENEMOS ALGO<br/>QUE CONTARLES</h2><button className="text-button" tabIndex={opened?0:-1} disabled={!opened||transitioning} onClick={discover}>DESCUBRIR <span aria-hidden="true">↗</span></button></div>
-        <img className="callas" src="/media/stationery/callas.png" alt="" aria-hidden="true"/>
-        <button className="open-envelope" tabIndex={opened?-1:0} disabled={opened} onClick={()=>setOpened(true)} aria-label="Abrir el sobre de Claudia y Jorge"/>
+        <img className="anthuriums" src="/media/stationery/anthuriums.png" alt="" aria-hidden="true"/>
+        <button className="open-envelope" tabIndex={opened?-1:0} disabled={opened} onClick={()=>setOpened(true)} aria-label="Abrir el sobre de Jorge y Claudia"/>
       </div>
       <p className="hint" aria-live="polite">{opened?'Hay historias que merecen ser compartidas.':'Toca el sobre para abrir'}</p>
     </section>}
@@ -105,7 +105,7 @@ export default function Home() {
     </section>}
     {stage==='date'&&<section className="date-page">
       <h1 className="sr-only" ref={heading} tabIndex={-1}>Nuestra celebración</h1>
-      <div className="date-photo"><img src={media.photos[0]} alt="Claudia y Jorge, juntos bajo la luz de la tarde"/><span className="script-names">Claudia y Jorge</span></div>
+      <div className="date-photo"><img src={media.photos[0]} alt="Jorge y Claudia, juntos bajo la luz de la tarde"/><span className="script-names">Jorge y Claudia</span></div>
       <Countdown/>
       <p className="personal-note">Lo mejor de nuestra historia<br/>también se escribe contigo.</p>
       <button className="primary-button" onClick={()=>setStage('rsvp')}>CONFIRMAR ASISTENCIA <span aria-hidden="true">↗</span></button>
@@ -125,9 +125,10 @@ export default function Home() {
       </form>
     </section>}
     {stage==='thanks'&&<section className="thanks-page">
-      <p className="eyebrow">RESPUESTA RECIBIDA</p><span className="thanks-mark" aria-hidden="true">C & J</span><h1 ref={heading} tabIndex={-1}>Gracias, {name.trim().split(/\s+/)[0]}.</h1>
+      <p className="eyebrow">RESPUESTA RECIBIDA</p><span className="thanks-mark" aria-hidden="true">J & C</span><h1 ref={heading} tabIndex={-1}>Gracias, {name.trim().split(/\s+/)[0]}.</h1>
       <p>{attendance==='yes'?'Qué alegría saber que estarás con nosotros.':'Gracias por hacérnoslo saber. Te llevaremos con nosotros en este día.'}</p>
-      <p className="personal-note">Con todo nuestro cariño,<br/><i className="script-names">Claudia y Jorge</i></p><Countdown/><p className="eyebrow">LIMA, PERÚ</p>
+      <p className="personal-note">Con todo nuestro cariño,<br/><i className="script-names">Jorge y Claudia</i></p><Countdown/><p className="eyebrow">LIMA, PERÚ</p>
     </section>}
   </main>;
 }
+

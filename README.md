@@ -1,4 +1,4 @@
-# Claudia y Jorge — Tienes un mensaje de
+# Jorge y Claudia — Tienes un mensaje de
 
 Micrositio mobile-first, React/Vinext y Cloudflare D1.
 
@@ -14,24 +14,24 @@ Node.js 22.13 o superior:
 El RSVP necesita el servidor y la base de datos; no se abre haciendo doble clic en un HTML.
 
 ## Diseño actual
-Fondo vino profundo #310606, sobre ivory frontal de papel texturizado con encaje blanco antiguo y monograma C & J impreso. Dos calas a la derecha, sin sellos ni cintas.
-Encabezado: «Tienes un mensaje de» y «Claudia / y Jorge».
-Se quitaron las líneas, Para ti, con cariño C & J, el crédito de película y las sobreimpresiones Nos casamos/fecha.
+Fondo vino profundo #310606, sobre ivory frontal de papel texturizado con encaje blanco antiguo y monograma J & C impreso. Dos anturios blancos a la derecha, sin sellos ni cintas.
+Nombres reducidos aproximadamente un 15% respecto de la versión anterior. Encabezado: «Tienes un mensaje de» y «Jorge / y Claudia».
+Se quitaron las líneas, Para ti, con cariño J & C, el crédito de película y las sobreimpresiones Nos casamos/fecha.
 El video real se reproduce completo. Solo su evento ended abre el cierre con foto, cuenta regresiva y RSVP.
 No se corta la película por tiempo ni se añade texto sobre ella.
 
 ## Tipografía
-Pinyon Script es la alternativa elegida a Bickham Script Pro 3 para los nombres y acentos caligráficos.
-Se incluye localmente en public/fonts/pinyon-script.ttf, junto con su licencia abierta public/fonts/Pinyon-OFL.txt.
+WindSong es la alternativa gratuita elegida al estilo manuscrito de Brittany Signature / Amsterdam Four para los nombres y acentos caligráficos.
+Se incluye localmente en public/fonts/windsong.ttf, junto con su licencia abierta public/fonts/WindSong-OFL.txt.
 No necesita Adobe Fonts ni descargas desde Google Fonts al abrir la invitación.
-Fuente oficial: https://github.com/google/fonts/tree/main/ofl/pinyonscript
+Fuente oficial: https://github.com/google/fonts/tree/main/ofl/windsong
 Libre Bodoni sigue incluida localmente para el texto editorial.
 ## Archivos
 - public/media/photos/claudia-jorge.jpeg: foto original de los novios.
 - public/media/photos/pelicula-retrato.jpg: fotograma de su película.
 - public/media/video/pelicula.mp4: video real optimizado a 1280 × 720, H.264/AAC y fast-start; 36.16 s, aproximadamente 11.3 MB. No se modifica el original de 323 MB.
-- public/media/stationery/envelope-ivory.png: sobre generado con ImageGen integrado (modo built-in). El recorte CSS evita el margen exterior del archivo.
-- public/media/stationery/callas.png: dos calas generadas con ImageGen integrado, con canal alfa.
+- public/media/stationery/envelope-jc.png: sobre generado con ImageGen integrado (modo built-in). El recorte CSS evita el margen exterior del archivo.
+- public/media/stationery/anthuriums.png: dos anturios blancos generados con ImageGen integrado, con canal alfa.
 - IMAGE-PROMPTS.txt: prompts exactos de ambos recursos.
 - app/media.ts: rutas de foto y video.
 - app/countdown-time.ts: objetivo del contador, 12/12/2026 a las 00:00 de Lima (UTC-5), hasta recibir la hora real.
@@ -57,4 +57,5 @@ Compilación y TypeScript correctos. Ruta y nuevos recursos responden HTTP 200.
 No se realizó inspección visual en navegador/dispositivo. Assets inspeccionados directamente.
 La integración WebMCP opcional no se verificó en contexto compatible.
 El backend RSVP y la cuenta regresiva conservan la implementación previamente verificada.
+
 

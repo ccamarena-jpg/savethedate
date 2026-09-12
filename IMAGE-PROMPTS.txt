@@ -17,3 +17,9 @@ Subject: exactly TWO small ivory-white calla lily flowers with long slender natu
 Composition: tightly framed botanical cutout, soft natural studio light, realistic petal folds and understated warm white coloring.
 Avoid: extra flowers, leaves, other plants, envelope, text, browser/UI, page background, vases, ribbons, wax seals, hands, props, watermark, cast shadow.
 
+
+UPDATED J & C ENVELOPE
+Use case: text-localization. Input image is the edit target. Change ONLY the printed monogram from "C & J" to "J & C", in this exact left-to-right order: uppercase J, ampersand, uppercase C. Match the existing thin ornamental dark burgundy calligraphy and centered monogram location and scale. Preserve exactly the same ivory paper envelope, lace edging, front view, lighting, paper texture, rectangular envelope silhouette, composition, crop and padding. Preserve dimensions 1561x1008 as closely as possible. No flowers or other additions. Everything except the monogram must remain unchanged.
+
+WHITE ANTHURIUMS
+Use case: photorealistic-natural. Asset type: editorial wedding floral accent cutout. Exactly two small white anthurium flowers, botanically identifiable glossy ivory heart-shaped spathes with slender pale cream upright spadices and long delicate green stems. Natural diagonal arrangement from the stem ends at lower-left to the flowers at upper-right. Portrait 2:3 composition, include every part of both long stems with comfortable padding. Photorealistic elegant editorial wedding styling with delicate natural detail. Isolated on a genuinely transparent background with real alpha, no background color or checkerboard baked in. No calla lilies, no additional leaves or flowers, no vases, ribbons, shadows, halo, text or other objects.
