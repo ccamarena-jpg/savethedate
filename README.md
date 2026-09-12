@@ -20,14 +20,12 @@ Se quitaron las líneas, Para ti, con cariño C & J, el crédito de película y 
 El video real se reproduce completo. Solo su evento ended abre el cierre con foto, cuenta regresiva y RSVP.
 No se corta la película por tiempo ni se añade texto sobre ella.
 
-## Tipografía exacta pendiente
-Bickham Script Pro 3 no estaba instalada y no se recibió un proyecto Adobe Fonts.
-CSS prioriza bickham-script-pro-3 y la versión local Bickham Script Pro 3, cuando estén disponibles.
-Provisionalmente usa Pinyon Script mediante Google Fonts, con reserva local de cursiva.
-Para que todos los invitados vean Bickham exacta, incorpora el enlace CSS del proyecto web autorizado de Adobe Fonts en app/layout.tsx.
-No se incluye ni se afirma haber instalado Bickham. Referencia: https://fonts.adobe.com/fonts/bickham-script
-Libre Bodoni está incluida localmente, con su licencia en public/fonts/OFL.txt.
-
+## Tipografía
+Pinyon Script es la alternativa elegida a Bickham Script Pro 3 para los nombres y acentos caligráficos.
+Se incluye localmente en public/fonts/pinyon-script.ttf, junto con su licencia abierta public/fonts/Pinyon-OFL.txt.
+No necesita Adobe Fonts ni descargas desde Google Fonts al abrir la invitación.
+Fuente oficial: https://github.com/google/fonts/tree/main/ofl/pinyonscript
+Libre Bodoni sigue incluida localmente para el texto editorial.
 ## Archivos
 - public/media/photos/claudia-jorge.jpeg: foto original de los novios.
 - public/media/photos/pelicula-retrato.jpg: fotograma de su película.
@@ -59,3 +57,4 @@ Compilación y TypeScript correctos. Ruta y nuevos recursos responden HTTP 200.
 No se realizó inspección visual en navegador/dispositivo. Assets inspeccionados directamente.
 La integración WebMCP opcional no se verificó en contexto compatible.
 El backend RSVP y la cuenta regresiva conservan la implementación previamente verificada.
+
