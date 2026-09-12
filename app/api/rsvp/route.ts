@@ -1,4 +1,5 @@
-import { getRawDb } from '@/db/raw';
+import { saveRsvp } from '@/db/raw';
+export const runtime = 'nodejs';
 export async function POST(request: Request) {
   const origin = request.headers.get('origin');
   if (origin && origin !== new URL(request.url).origin) return Response.json({error:'Origin rejected'}, {status:403});
@@ -16,8 +17,7 @@ export async function POST(request: Request) {
     return Response.json({error:'Invalid response'}, {status:400});
   }
   try {
-    await getRawDb().prepare('INSERT INTO rsvps (id, name, attendance, message, created_at) VALUES (?, ?, ?, ?, ?) ON CONFLICT(id) DO NOTHING')
-      .bind(data.id, data.name.trim(), data.attendance, data.message.trim(), new Date().toISOString()).run();
+    await saveRsvp(data);
     return Response.json({saved:true}, {headers:{'Cache-Control':'no-store'}});
   } catch { return Response.json({error:'Please retry'}, {status:503}); }
 }
