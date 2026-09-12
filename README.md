@@ -9,13 +9,9 @@ Framework Next.js. Build npm run build. Output .next. Node 22.x.
 vercel.json incluye estos ajustes. Eliminar overrides antiguos de Vite/dist en Vercel.
 
 ## Activar las confirmaciones RSVP
-1. Crear/conectar una base Neon desde Vercel Marketplace/Storage.
-2. Añadir su conexión PostgreSQL como DATABASE_URL en las variables de entorno del proyecto (Production y Preview si corresponde). No usar NEXT_PUBLIC_.
-3. En el editor SQL de Neon, ejecutar db/vercel-schema.sql.
-4. Volver a desplegar.
-Sin DATABASE_URL o sin tabla, la invitación abre pero RSVP devuelve error: nunca confirma un guardado inexistente.
-Las respuestas anteriores de Cloudflare D1 NO se transfieren automáticamente. El sitio anterior continúa con su propia base.
-No existe una ruta pública para listar respuestas.
+Google Sheets mediante Apps Script. Sigue google-sheets/SETUP.md y copia google-sheets/Code.gs en tu hoja.
+Variables privadas de Vercel: GOOGLE_SCRIPT_URL y RSVP_SHEETS_SECRET.
+No requiere Neon. Sin configurar la conexión, el RSVP devuelve error y no confirma un guardado inexistente.
 
 ## Recursos
 public/media/photos/claudia-jorge.jpeg: fotografía.
