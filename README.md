@@ -1,4 +1,4 @@
-# Jorge y Claudia — Vercel
+# Claudia y Jorge — Vercel
 ## Ejecutar
 Node.js 22. npm ci, npm run dev.
 Producción: npm run build y npm run start.
@@ -16,7 +16,7 @@ No requiere Neon. Sin configurar la conexión, el RSVP devuelve error y no confi
 ## Recursos
 public/media/photos/claudia-jorge.jpeg: fotografía.
 public/media/video/pelicula.mp4: película completa.
-public/media/stationery/envelope-jc.png: sobre J&C.
+public/media/stationery/envelope-ivory.png: sobre C&J.
 public/media/stationery/anthuriums.png: anturios.
 public/fonts/pinyon-script.ttf: fuente de los nombres, licencia Pinyon-OFL.txt.
 IMAGE-PROMPTS.txt: instrucciones de generación de imágenes.

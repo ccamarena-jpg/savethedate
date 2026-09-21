@@ -105,19 +105,19 @@ export default function Home() {
   },[]);
 
   return <main className={'experience stage-'+stage}>
-    {stage==='envelope'&&<section className={'invitation '+(opened?'is-open ':'')+(transitioning?'departing':'')} aria-label="Un mensaje de Jorge y Claudia">
-      <div className="intro"><p className="eyebrow">Tienes un mensaje de</p><h1 className="couple-names"><span>Jorge</span><span>y Claudia</span></h1></div>
+    {stage==='envelope'&&<section className={'invitation '+(opened?'is-open ':'')+(transitioning?'departing':'')} aria-label="Un mensaje de Claudia y Jorge">
+      <div className="intro"><p className="eyebrow">Tienes un mensaje de</p><h1 className="couple-names"><span>Claudia</span><span>y Jorge</span></h1></div>
       <div className={'envelope '+(opened?'opened':'')}>
         <div className="lining"/>
-        <div className="envelope-body"><img src="/media/stationery/envelope-jc.png" alt=""/></div>
-        <div className="flap"><div className="flap-front"><img src="/media/stationery/envelope-jc.png" alt=""/></div><div className="flap-back"/></div>
+        <div className="envelope-body"><img src="/media/stationery/envelope-ivory.png" alt=""/></div>
+        <div className="flap"><div className="flap-front"><img src="/media/stationery/envelope-ivory.png" alt=""/></div><div className="flap-back"/></div>
         <div className="papers" aria-hidden={!opened}>
-          <figure className="photo photo-one"><button className="photo-open" disabled={!opened||transitioning} tabIndex={opened?0:-1} onClick={()=>setEnlargedPhoto(media.photos[1])} aria-label="Ampliar foto de Jorge y Claudia caminando juntos"><img src={media.photos[1]} alt="Jorge y Claudia caminando juntos"/></button><figcaption>un instante nuestro</figcaption></figure>
-          <figure className="photo photo-two"><button className="photo-open" disabled={!opened||transitioning} tabIndex={opened?0:-1} onClick={()=>setEnlargedPhoto(media.photos[0])} aria-label="Ampliar foto de Jorge y Claudia bajo la luz de la tarde"><img src={media.photos[0]} alt="Jorge y Claudia bajo la luz de la tarde"/></button><figcaption>y todo lo que viene.</figcaption></figure>
+          <figure className="photo photo-one"><button className="photo-open" disabled={!opened||transitioning} tabIndex={opened?0:-1} onClick={()=>setEnlargedPhoto(media.photos[1])} aria-label="Ampliar foto de Claudia y Jorge caminando juntos"><img src={media.photos[1]} alt="Claudia y Jorge caminando juntos"/></button><figcaption>un instante nuestro</figcaption></figure>
+          <figure className="photo photo-two"><button className="photo-open" disabled={!opened||transitioning} tabIndex={opened?0:-1} onClick={()=>setEnlargedPhoto(media.photos[0])} aria-label="Ampliar foto de Claudia y Jorge bajo la luz de la tarde"><img src={media.photos[0]} alt="Claudia y Jorge bajo la luz de la tarde"/></button><figcaption>y todo lo que viene.</figcaption></figure>
         </div>
         <div className="letter" aria-hidden={!opened}><h2>TENEMOS ALGO<br/>QUE CONTARLES</h2><button className="text-button" tabIndex={opened?0:-1} disabled={!opened||transitioning} onClick={discover}>DESCÚBRELO <span aria-hidden="true">↗</span></button></div>
         <img className="anthuriums" src="/media/stationery/anthuriums.png" alt="" aria-hidden="true"/>
-        <button className="open-envelope" tabIndex={opened?-1:0} disabled={opened} onClick={()=>setOpened(true)} aria-label="Abrir el sobre de Jorge y Claudia"/>
+        <button className="open-envelope" tabIndex={opened?-1:0} disabled={opened} onClick={()=>setOpened(true)} aria-label="Abrir el sobre de Claudia y Jorge"/>
       </div>
       <p className="hint" aria-live="polite">{opened?'Hay historias que merecen ser compartidas.':'Toca el sobre para abrir'}</p>
     </section>}
@@ -133,7 +133,7 @@ export default function Home() {
     </section>}
     {stage==='date'&&<section className="date-page">
       <h1 className="sr-only" ref={heading} tabIndex={-1}>Nuestra celebración</h1>
-      <div className="date-photo"><img src={media.photos[0]} alt="Jorge y Claudia, juntos bajo la luz de la tarde"/><span className="script-names">Jorge y Claudia</span></div>
+      <div className="date-photo"><img src={media.photos[0]} alt="Claudia y Jorge, juntos bajo la luz de la tarde"/><span className="script-names">Claudia y Jorge</span></div>
       <Countdown/>
       <p className="personal-note">Lo mejor de nuestra historia<br/>también se escribe contigo.</p>
       <button className="primary-button" onClick={()=>setStage('rsvp')}>CONFIRMAR ASISTENCIA <span aria-hidden="true">↗</span></button>
@@ -153,13 +153,13 @@ export default function Home() {
       </form>
     </section>}
     {stage==='thanks'&&<section className="thanks-page">
-      <p className="eyebrow">RESPUESTA RECIBIDA</p><span className="thanks-mark" aria-hidden="true">J & C</span><h1 ref={heading} tabIndex={-1}>Gracias, {name.trim().split(/\s+/)[0]}.</h1>
+      <p className="eyebrow">RESPUESTA RECIBIDA</p><span className="thanks-mark" aria-hidden="true">C & J</span><h1 ref={heading} tabIndex={-1}>Gracias, {name.trim().split(/\s+/)[0]}.</h1>
       <p>{attendance==='yes'?'Qué alegría saber que estarás con nosotros.':'Gracias por hacérnoslo saber. Te llevaremos con nosotros en este día.'}</p>
-      <p className="personal-note">Con todo nuestro cariño,<br/><i className="script-names">Jorge y Claudia</i></p><Countdown/><p className="eyebrow">LIMA, PERÚ</p>
+      <p className="personal-note">Con todo nuestro cariño,<br/><i className="script-names">Claudia y Jorge</i></p><Countdown/><p className="eyebrow">LIMA, PERÚ</p>
     </section>}
     <dialog ref={photoDialog} className="photo-dialog" aria-label="Fotografía ampliada" onCancel={()=>setEnlargedPhoto(null)} onClose={()=>setEnlargedPhoto(null)} onClick={e=>{if(e.target===e.currentTarget)setEnlargedPhoto(null);}}>
       <button className="photo-close" onClick={()=>setEnlargedPhoto(null)} aria-label="Cerrar fotografía" autoFocus>×</button>
-      {enlargedPhoto&&<img src={enlargedPhoto} alt="Jorge y Claudia" />}
+      {enlargedPhoto&&<img src={enlargedPhoto} alt="Claudia y Jorge" />}
     </dialog>
   </main>;
 }

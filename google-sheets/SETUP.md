@@ -1,4 +1,4 @@
-# Conectar la hoja de Jorge y Claudia
+# Conectar la hoja de Claudia y Jorge
 
 1. Abre la hoja https://docs.google.com/spreadsheets/d/1T6LqoEhdsySHqyY9-JYW_fAFYp_k2-9ZvKGkJnrz7Ro/edit
 2. Extensiones → Apps Script. Pega Code.gs y guarda.
